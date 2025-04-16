@@ -93,7 +93,7 @@ public class Appointment
                 {
                     Connection con=ConnectionProvider.getCon();
                     Statement st=con.createStatement();
-                    ResultSet rs=st.executeQuery("select * from Doctors where Doctor_Type='Eye'");
+                    ResultSet rs=st.executeQuery("select * from Doctors where Doctor_Type='Eyes'");
                     while(rs.next())
                     {
                         System.out.print("\t* Doctor_ID :     "+rs.getInt(1)+"                         \n");
