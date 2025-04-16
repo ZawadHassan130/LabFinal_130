@@ -157,8 +157,9 @@ public class Doctor extends Person
                     Statement st=con.createStatement();
                     st.executeQuery("Select * from Appointments where AppointmentID="+id);
                     int pid=GetPatientID(appid);
+                    String symtops = GetpatientSymptops(appid);
                     Report rp=new Report();
-                    rp.DiagonistReport(pid,appid,id);
+                    rp.DiagonistReport(pid,appid,id,symtops);
                 }catch(Exception e)
                 {
                     e.printStackTrace();
@@ -196,5 +197,28 @@ public class Doctor extends Person
         }
         return pid;
     }
+
+    private String GetpatientSymptops(int appid){
+        String problem = "null";
+        try {
+            Connection con=ConnectionProvider.getCon();
+            Statement st=con.createStatement();
+            ResultSet rs=st.executeQuery("select * from Appointments where AppointmentID="+appid);
+            while(rs.next())
+            {
+                problem=rs.getString(2);
+            }
+
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return problem;
+
+    }
+
+
+
     /***********************************************************************************************/
 }
