@@ -8,6 +8,7 @@ public class Main
     {
         System.out.println("\n\t******************************E-HealthCare-Management-Sytem***********************************\n");
         boolean check = false;
+        int Docid;
         Scanner sc=new Scanner(System.in);
         Admin a=new Admin();
         Patients p=null;
@@ -216,7 +217,7 @@ public class Main
                     }
                     else
                     {
-                        System.out.println("Invali UserID or password!!!");
+                        System.out.println("Invalid UserID or password!!!");
                     }
                     break;
                 }
@@ -226,16 +227,16 @@ public class Main
                     boolean checkDoctor = false;
                     System.out.println("***************Welcome to Doctors portal******************");
                     int flag=0;
-                    int id;
                     String pd;
-                    System.out.print("DOCTOR - ID : ");id=sc.nextInt();
+                    System.out.print("DOCTOR - ID : ");
+                    Docid=sc.nextInt();
                     System.out.print("Password : ");pd=sc.next();
                     try {
                         Connection con=ConnectionProvider.getCon();
                         Statement st=con.createStatement();
                         ResultSet rs=st.executeQuery("Select * from Users");
                         while(rs.next()) {
-                            if(rs.getInt(1)==id && rs.getString(2).compareTo("Doctor")==0 && (rs.getString(3).compareTo(pd)==0 )){
+                            if(rs.getInt(1)==Docid && rs.getString(2).compareTo("Doctor")==0 && (rs.getString(3).compareTo(pd)==0 )){
                                 flag=1;
                             }
                         }
@@ -260,19 +261,20 @@ public class Main
                                 case 1:
                                 {
                                     d=new Doctor();
-                                    d.ShowDoctorDetails(id);
+                                    d.ShowDoctorDetails(Docid);
                                     break;
                                 }
                                 case 2:
                                 {
                                     d=new Doctor();
-                                    d.viewAppointment(id);
+                                    d.viewAppointment(Docid);
                                     break;
                                 }
                                 case 3:
                                 {
                                     d=new Doctor();
-                                    d.DiagonistPatient(id);
+                                    d.viewAppointment(Docid);
+                                    d.DiagonistPatient(Docid);
                                     break;
                                 }
                                 case 4:
